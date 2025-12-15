@@ -11,7 +11,7 @@
          * 1. Internal CSS (Used <style> tag)
          * 2. Responsive Grid/Stack (Implemented with CSS Grid)
          * 3. Modern Sans-serif Font (Inter used)
-         * 4. Clean, Scientific Color Palette (Updated to Deep Ocean Blue Accent)
+         * 4. Clean, Scientific Color Palette (Deep Ocean Blue Accent)
          */
 
         :root {
@@ -65,16 +65,18 @@
             border-radius: var(--border-radius);
             padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
+            /* Add scale transform for the new hover effect */
+            transition: transform 0.3s ease-out, box-shadow 0.3s; 
             min-height: 100px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
+        /* Theme Tweak (3): Subtle Scale/Zoom Hover Effect */
         .bento-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px) scale(1.01); /* Lift and scale slightly */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         /* Typography within Cards */
@@ -97,7 +99,8 @@
             color: var(--color-text-medium);
             line-height: 1.5;
         }
-
+        
+        /* Social Link Styling */
         .social-link {
             display: inline-block;
             margin-right: var(--spacing-unit);
@@ -112,12 +115,44 @@
         }
 
         /* Specific Card Styling */
-
-        /* Card 1: Profile - Large Box */
         .card-profile {
             padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+            
+            /* --- PROFILE CARD BACKGROUND IMAGE (NEW) --- */
+            background-image: url('bg.jpg'); /* Sets the image file */
+            background-size: cover;          /* Ensures image covers the whole area */
+            background-position: center;     /* Centers the image */
+            background-repeat: no-repeat;    /* Prevents tiling */
+            
+            /* Text Contrast Over Image */
+            color: var(--color-white); 
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); 
+            background-color: rgba(0, 0, 0, 0.1); /* Subtle dark overlay (optional) */
         }
         
+        /* Override Text Colors for Profile Card to be white for readability */
+        .card-profile .card-title,
+        .card-profile .card-subtitle,
+        .card-profile .tagline,
+        .card-profile .accent-text,
+        .card-profile .card-text {
+            color: var(--color-white); 
+        }
+        
+        /* Adjust border color when profile card background is active */
+        .card-profile .tagline {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5); 
+        }
+
+        /* Override Link Color for Profile Card */
+        .card-profile .social-link {
+            color: #a0d4ff; /* Lighter blue for better visibility */
+        }
+        .card-profile .social-link:hover {
+            color: var(--color-white);
+        }
+        
+        /* Other card styling */
         .tagline {
             font-size: 1.25rem;
             font-weight: 500;
@@ -132,13 +167,31 @@
             font-weight: 600;
         }
 
+        /* Helper for flexible content alignment */
+        .content-group {
+            margin-top: auto; 
+        }
+        
+        /* --- Playlist Card Specific Styling for Embed --- */
+        .card-playlist {
+            /* Reduce padding as the iframe handles its own padding/margin */
+            padding: var(--spacing-unit); 
+            /* Ensure the card accommodates the iframe's height fully */
+            min-height: 380px; 
+            overflow: hidden; /* Hide anything that might spill over */
+        }
+        .playlist-content {
+            padding: 0 var(--spacing-unit); /* Add horizontal padding back to internal text */
+        }
+
+
         /*
          * MEDIA QUERY: Desktop Layout (Bento Grid)
          */
-        @media (min-width: 768px) {
+        @media (min-width: 992px) { 
             
             .bento-grid-container {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
 
             /* --- LAYOUT MAPPING --- */
@@ -150,40 +203,56 @@
                 min-height: 350px;
             }
 
-            /* Card 2 (Location): Small box (1x1) */
+            /* Card 2 (Location): Small box (1x1) - Top right corner */
             .card-location {
                 grid-column: 3;
                 grid-row: 1;
             }
             
-            /* Card 3 (Subjects): Medium box (1x1) */
+            /* Card 3 (Subjects): Medium box (1x1) - Next to Location */
             .card-tech-stack {
-                grid-column: 3;
-                grid-row: 2;
+                grid-column: 4;
+                grid-row: 1;
             }
 
-            /* Card 4 (Case Study): Medium box (1x1) */
+            /* Card 4 (Case Study): Medium box (1x1) - Under profile, left side */
             .card-case-study {
                 grid-column: 1;
                 grid-row: 3;
             }
 
-            /* Card 5 (Hobby): Small box (1x1) */
+            /* Card 5 (Hobby): Small box (1x1) - Next to Case Study */
             .card-hobby {
                 grid-column: 2;
                 grid-row: 3;
             }
 
-            /* Card 6 (Playlist): Wide box (3x1) */
+            /* NEW Card (Reflection): 1x1 - Next to Hobby */
+            .card-reflection {
+                grid-column: 3;
+                grid-row: 3;
+            }
+
+            /* Card 6 (Playlist): Wide box at the bottom (4x1) */
             .card-playlist {
-                grid-column: 1 / span 3;
+                grid-column: 1 / span 4;
                 grid-row: 4;
             }
         }
-
-        /* Helper for flexible content alignment */
-        .content-group {
-            margin-top: auto; 
+        /* For mid-size screens (768px to 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+             .bento-grid-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            /* Original layout */
+            .card-profile { grid-column: span 2; grid-row: span 2; }
+            .card-location { grid-column: 3; grid-row: 1; }
+            .card-tech-stack { grid-column: 3; grid-row: 2; }
+            .card-case-study { grid-column: 1; grid-row: 3; }
+            .card-hobby { grid-column: 2; grid-row: 3; }
+            /* New card is placed under the rest */
+            .card-reflection { grid-column: 3; grid-row: 3; }
+            .card-playlist { grid-column: 1 / span 3; grid-row: 4; }
         }
     </style>
 </head>
@@ -205,9 +274,9 @@
         </div>
         <div class="content-group">
             <p class="card-text" style="margin-bottom: 0.5rem;">Quick Links:</p>
-            <a href="#" class="social-link">LinkedIn</a>
-            <a href="#" class="social-link">GitHub</a>
-            <a href="#" class="social-link">UMT Portal</a>
+            <a href="#https://github.com/hafizzishak29" class="social-link" target="_blank">LinkedIn</a>
+            <a href="#" class="social-link" target="_blank">GitHub</a>
+            <a href="#" class="social-link" target="_blank">UMT Portal</a>
         </div>
     </div>
 
@@ -220,7 +289,7 @@
         </div>
         <div class="content-group">
             <p class="card-text" style="font-size: 1.2rem; font-weight: 700; color: var(--color-text-dark);">
-                10:44 AM (KLT)
+                11:40 AM (KLT)
             </p>
         </div>
     </div>
@@ -252,7 +321,7 @@
         </div>
         <div class="content-group">
             <p class="card-text">
-                *Analyzing texture profiles of **Kuih Lapis** using Rheometer and Differential Scanning Calorimetry (DSC).*
+                *Analyzing texture profiles of Kuih Lapis.*
             </p>
         </div>
     </div>
@@ -268,19 +337,28 @@
             </p>
         </div>
     </div>
-
-    <div class="bento-card card-playlist">
+    
+    <div class="bento-card card-reflection">
         <div>
-            <div class="card-subtitle">Study Focus Playlist</div>
-            <p class="card-text">
-                (Placeholder for Embedded Music Player / Spotify Widget)
-            </p>
+            <div class="card-subtitle">Why Food Tech Matters in Malaysia</div>
         </div>
         <div class="content-group">
-            <p class="card-text" style="font-style: italic;">
+            <p class="card-text">
+                Sustainable food security is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.
+            </p>
+        </div>
+    </div>
+
+    <div class="bento-card card-playlist">
+        <div class="playlist-content">
+            <div class="card-subtitle">Study Focus Playlist</div>
+            <p class="card-text" style="font-style: italic; margin-bottom: 10px;">
                 "Instrumental Post-Rock for Deep Focus."
             </p>
         </div>
+        
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4BaSSMnarkzOzCi2vcWE67?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        
     </div>
 
 </div>
