@@ -49,9 +49,11 @@
         /* Bento Grid Container */
         .bento-grid-container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1200px; /* Max desktop width */
             display: grid;
             gap: var(--spacing-unit);
+            
+            /* Default: Mobile Stacked Layout */
             grid-template-columns: 1fr;
             grid-template-rows: auto;
         }
@@ -70,12 +72,13 @@
             justify-content: space-between;
         }
 
+        /* Theme Tweak: Subtle Scale/Zoom Hover Effect */
         .bento-card:hover {
             transform: translateY(-2px) scale(1.01); 
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* Typography */
+        /* Typography within Cards */
         .card-title {
             font-size: 1.5rem;
             font-weight: 700;
@@ -96,194 +99,6 @@
             line-height: 1.5;
         }
         
+        /* Social Link Styling */
         .social-link {
-            display: inline-block;
-            margin-right: var(--spacing-unit);
-            color: var(--color-accent);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .social-link:hover {
-            color: #004b7a; 
-        }
-
-        /* App Button Styling */
-        .btn-app-link {
-            display: inline-block;
-            background-color: var(--color-accent);
-            color: var(--color-white) !important;
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            margin-top: 15px;
-            text-align: center;
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 4px 12px rgba(0, 95, 156, 0.2);
-        }
-
-        .btn-app-link:hover {
-            background-color: #004b7a;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 95, 156, 0.3);
-        }
-
-        /* Card Customizations */
-        .card-profile {
-            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
-            background-image: url('bg.jpg'); 
-            background-size: cover;          
-            background-position: center;     
-            background-repeat: no-repeat;    
-            color: var(--color-white); 
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); 
-            background-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .card-profile .card-title,
-        .card-profile .card-subtitle,
-        .card-profile .tagline,
-        .card-profile .accent-text,
-        .card-profile .card-text {
-            color: var(--color-white); 
-        }
-        
-        .card-profile .tagline {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5); 
-        }
-
-        .card-profile .social-link {
-            color: #a0d4ff; 
-        }
-
-        .tagline {
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: var(--color-text-dark);
-            margin-top: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .accent-text {
-            color: var(--color-accent);
-            font-weight: 600;
-        }
-
-        .content-group {
-            margin-top: auto; 
-        }
-        
-        .card-playlist {
-            padding: var(--spacing-unit); 
-            min-height: 380px; 
-            overflow: hidden; 
-        }
-
-        /* Desktop Grid Layout */
-        @media (min-width: 992px) { 
-            .bento-grid-container {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            .card-profile { grid-column: span 2; grid-row: span 2; min-height: 350px; }
-            .card-location { grid-column: 3; grid-row: 1; }
-            .card-tech-stack { grid-column: 4; grid-row: 1; }
-            .card-case-study { grid-column: 1; grid-row: 3; }
-            .card-hobby { grid-column: 2; grid-row: 3; }
-            .card-reflection { grid-column: 3; grid-row: 3; }
-            .card-playlist { grid-column: 1 / span 4; grid-row: 4; }
-        }
-
-        /* Tablet Grid Layout */
-        @media (min-width: 768px) and (max-width: 991px) {
-             .bento-grid-container {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .card-profile { grid-column: span 2; grid-row: span 2; }
-            .card-location { grid-column: 3; grid-row: 1; }
-            .card-tech-stack { grid-column: 3; grid-row: 2; }
-            .card-case-study { grid-column: 1; grid-row: 3; }
-            .card-hobby { grid-column: 2; grid-row: 3; }
-            .card-reflection { grid-column: 3; grid-row: 3; }
-            .card-playlist { grid-column: 1 / span 3; grid-row: 4; }
-        }
-    </style>
-</head>
-<body>
-
-<div class="bento-grid-container">
-
-    <div class="bento-card card-profile">
-        <div>
-            <div class="card-title">AMAR HAFIZ</div>
-            <div class="card-subtitle">AGRO Science Student</div>
-            <p class="tagline">'Innovating VEGETABLEsafety.'</p>
-            <p class="card-text">
-                <span class="accent-text">Program:</span> AGRO Science (B.Sc. Hons.)<br>
-                <span class="accent-text">Year:</span> Year 4 (Final Year)
-            </p>
-        </div>
-        <div class="content-group">
-            <p class="card-text" style="margin-bottom: 0.5rem;">Quick Links:</p>
-            <a href="https://github.com/hafizzishak29" class="social-link" target="_blank">LinkedIn</a>
-            <a href="#" class="social-link" target="_blank">GitHub</a>
-            <a href="#" class="social-link" target="_blank">UMT Portal</a>
-        </div>
-    </div>
-
-    <div class="bento-card card-location">
-        <div>
-            <div class="card-subtitle">Current Location</div>
-            <p class="card-text">
-                <span class="accent-text">Campus:</span> UMT, Kuala Nerus
-            </p>
-        </div>
-        <div class="content-group">
-            <p class="card-text" style="font-size: 1.2rem; font-weight: 700; color: var(--color-text-dark);">
-                11:40 AM (KLT)
-            </p>
-        </div>
-    </div>
-
-    <div class="bento-card card-tech-stack">
-        <div>
-            <div class="card-subtitle">Key Skills & Subjects</div>
-            <p class="card-text">Technical Focus Areas:</p>
-            <ul>
-                <li class="card-text">Food Chemistry</li>
-                <li class="card-text">Food Microbiology</li>
-                <li class="card-text">Advanced Excel Analysis</li>
-                <li class="card-text">Lab Analysis Techniques</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="bento-card card-case-study">
-        <div>
-            <div class="card-subtitle">Featured Project</div>
-            <p class="card-text accent-text">Case Study Title:</p>
-            <p class="card-text">**Starch Gelatinization in Local Kuih**</p>
-        </div>
-        <div class="content-group">
-            <p class="card-text">*Analyzing texture profiles of Kuih Lapis.*</p>
-            <a href="https://github.com/s79912-collab/focus-timer-app" target="_blank" class="btn-app-link">Try My Focus Timer App</a>
-        </div>
-    </div>
-
-    <div class="bento-card card-hobby">
-        <div>
-            <div class="card-subtitle">Campus Life</div>
-            <p class="card-text accent-text">Relaxation & Fitness</p>
-            <p class="card-text">Evening walks and photography at the beautiful **Pantai UMT**.</p>
-        </div>
-    </div>
-    
-    <div class="bento-card card-reflection">
-        <div>
-            <div class="card-subtitle">Why Food Tech Matters in Malaysia</div>
-        </div>
-        <div class="content-group">
-            <p class="card-text
+            display: inline-
